@@ -13,9 +13,17 @@ represent the main website. The _staging_ branch is a development environment to
 work in, while the _production_ branch represents the deployed version of the
 site.
 
-The _paper_ branch of the site holds the text as submitted for my (Nathan Kim's)
-senior capstone final report in Statistics & Data Science, and some notes as
-were used in working on the project during the Fall of 2021.
+The _paper_ branch is created off of the _staging_ branch, and holds the text as
+submitted for my (Nathan Kim's) senior capstone final report in Statistics &
+Data Science, and some notes as were used in working on the project during the
+Fall of 2021.
+
+The idea in this branching structure is that there are several common resources
+that all three will share: this README, datasets, markdown files, and so on.
+However, they often won't require the exact same version -- the paper will
+probably be more academic or dry than the website, and the production and
+staging versions need to be kept separate to maintain work while keeping the
+site deployed and stable.
 
 ### Directory structure
 
