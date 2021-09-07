@@ -46,19 +46,3 @@ d3.js and the ggdubois R package (under construction). Some of the UI components
 of the website are planned to be completed with three.js and React Spring, and
 the design of the library will be completed mostly with the Material-UI library
 in JavaScript.
-
-### Workflow
-
-Edits to the website and to the content in general should be made to the
-_staging_ branch. It should periodically be merged into the _paper_ branch, and
-into the _production_ branch if and only if the site remains in a workable and
-publishable state from the previous version of the _production_ branch.
-
-Edits to the _paper_ branch should be made directly when meeting notes are being
-taken, when timelines or scratch paper are needed, when markdown files from
-_staging_ are being edited to fit requirements for the S&DS491 paper. Edits to
-this branch should not be merged into the _staging_ branch or _production_
-branch, and only the _staging_ branch should be merged into _paper_.
-
-Edits to the _production_ branch should not be made directly. It should only be
-modified through edits and merges from the _staging_ branch.
