@@ -46,3 +46,17 @@ d3.js and the ggdubois R package (under construction). Some of the UI components
 of the website are planned to be completed with three.js and React Spring, and
 the design of the library will be completed mostly with the Material-UI library
 in JavaScript.
+
+### Workflow
+
+Make edits on the _staging_ branch. Merge to the _paper_ branches periodically
+and to the _production_ branch when the public-facing website is ready to
+receive an update (i.e. the _production_ branch post-merge should still be in a
+usable and publishable state).
+
+Make edits to the paper branch if they have to deal with paper-specific items:
+deadlines, forms, other paperwork.
+
+Do not make edits to the production branch directly.
+
+![A diagram of what the workflow looks like.](public/branches.png)
