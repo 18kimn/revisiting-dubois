@@ -1,8 +1,16 @@
 #!/bin/sh
+BASENAME="${1%.*}"
 
-pandoc.exe -f markdown \
-  -o proposal.pdf \
-  --pdf-engine=xelatex.exe \
-  proposal.md
+pandoc -V geometry:margin=1in \
+  --standalone \
+  -f markdown \
+  --citeproc \
+  -o "$BASENAME.pdf" \
+  --bibliography=references/references.bib \
+  --csl=references/chicago-note-bibliography-with-ibid.csl \
+  --pdf-engine=xelatex \
+  $1
 
-echo file render finished
+echo "file render for $1 finished"
+
+

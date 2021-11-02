@@ -2,8 +2,8 @@
 title: Revisiting Du Bois
 subtitle: A Data Visualization Project
 author: Nathan Kim
-date: September 9th, 2021
-geometry: margin=1in
+date: September 15th, 2021
+nocite: '@*'
 ---
 
 # Introduction
@@ -11,9 +11,13 @@ geometry: margin=1in
 Prolific and prominent Black writer, historian, professor, political activist,
 W.E.B. Du Bois has left a legend in many ways. One profound way as been in
 developing and articulating data visualizations many years before canonical
-pioneers of visualization like Edward Tufte, Jacques Bertin, or Stephen Few.
+pioneers of visualization like Edward Tufte, Jacques Bertin, or Stephen Few. My
+project seeks to explore his work with a critical and quantitative lens. I hope
+to bring to Du Bois' portraits the worlds of modern statistics, computing
+resources, and interactive visualization, but also to these fields bring Du
+Bois' humanist lens and the goal of visualizing data to create a better world.
 
-This project has two conceptual goals.
+To do so, my project will focus on two questions:
 
 1. **How does Du Bois' approach to data visualization depart from canonical
    views of data and information?**
@@ -55,14 +59,14 @@ on Twitter has generated discussion and code for recreating Du Bois' symmetrical
 pie chart and an iconic spiral graph. Others have created a ggplot2 theme with a
 Du Bois-style color palette, viewable
 [here](https://github.com/vladmedenica/themedubois). My contribution to this
-project would be to extend these to include Du Bois' wrapped bar chart (42),
-scalable map, woven bar chart (41), spike-embedded circle chart (44), meandering
-spiral chart (40), "mountain peak" chart (52), and bidirectional bar chart
-(163). Also, while most discussion around Du Bois' "data portraits" have
-revolved around his work for the 1900 Paris Exposition, my work will also
-incorporate his graphics from other seminal works including _The Philadelphia
-Negro_, _Black Reconstruction_, _Color and Democracy_, and _The World and
-Africa_ in the package.
+project would be to extend these to include Du Bois' wrapped bar chart, scalable
+map, woven bar chart, spike-embedded circle chart, meandering spiral chart,
+"mountain peak" chart, and bidirectional bar
+chart.[@amherstBoisDataPortraits2018: 41, 42, 52, 44, 163] Also, while most
+discussion around Du Bois' "data portraits" have revolved around his work for
+the 1900 Paris Exposition, my work will also incorporate his graphics from other
+seminal works including _The Philadelphia Negro_, _Black Reconstruction_, _Color
+and Democracy_, and _The World and Africa_ in the package.
 
 The second component of my project will be a website extending Du Bois'
 explorations into the contemporary era. The website will display a series of
@@ -71,7 +75,9 @@ and one extended to topics of modern day. As opposed to literally emulating Du
 Bois' topic and adjusting only the time frame, these reanlyses will also include
 contemporary tools of interactivity and animation. Statistical analyses will
 also be incorporated into this visualization; for example, hierarchical
-clustering and Moran's I tests will be used to analyze geogrpahic dispersion.
+clustering and Moran's I tests will be used to analyze geogrpahic dispersion,
+and the time series data will be fitted with a Bayesian structural time series
+model to summarize and produce causal hypotheses from Du Bois' time series data.
 
 Data for this reanalysis will come from the American Community Survey (ACS) for
 contemporary figures and the Census Bureau's Public Use Microdata Sample (PUMS)
@@ -87,19 +93,21 @@ GitHub repositories for the ggplot2 package and the website can be found
 
 # Timeline
 
-October 1st: Prototype of ggplot2 functions ready. Datasets for reanalysis
+**October 1st:** Prototype of ggplot2 functions ready. Datasets for reanalysis
 obtained and cleaned; statistical plan for reanalysis cleared.
 
-October 15th: ggplot2 package is publication-ready (documentation with examples,
-vignettes, and auxilliary datasets included).
+**October 15th:** ggplot2 package is publication-ready (documentation with
+examples, vignettes, and auxilliary datasets included).
 
-November 1st: Draft reanalysis of Du Bois' topics in the website component
+**November 1st:** Draft reanalysis of Du Bois' topics in the website component
 ready.
 
-November 15th: Reanalysis revisions completed. Website composition and
+**November 15th:** Reanalysis revisions completed. Website composition and
 formatting begun.
 
-December 1st: Draft of website is finished.
+**December 1st:** Draft of website is finished.
 
-December 10th: Senior requirements (Poster, project report) finished; revisions
-to website finished
+**December 10th:** Senior requirements (Poster, project report) finished;
+revisions to website finished
+
+# Working Bibliography
