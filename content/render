@@ -6,11 +6,14 @@ pandoc -V geometry:margin=1in \
   -f markdown \
   --citeproc \
   -o "$BASENAME.pdf" \
+  --variable urlcolor=blue \
   --bibliography=references/references.bib \
   --csl=references/chicago-note-bibliography-with-ibid.csl \
+  -V mainfont="EB Garamond" \
+  -V monofont="Fira Code" \
+  -V fontsize=12pt \
+  --highlight-style=code_style.theme \
   --pdf-engine=xelatex \
   $1
 
 echo "file render for $1 finished"
-
-
