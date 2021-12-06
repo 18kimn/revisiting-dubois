@@ -4,6 +4,7 @@ BASENAME="${1%.*}"
 pandoc -V geometry:margin=1in \
   --standalone \
   -f markdown \
+  -F pandoc-crossref \
   --citeproc \
   -o "$BASENAME.pdf" \
   --variable urlcolor=blue \
