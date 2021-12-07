@@ -53,34 +53,67 @@ dispersion look like in the contemporary age?
 
 ### Data visualization through the centuries
 
-Modern data visualization began with modernity itself. In the 1600s, as
-writers
-
-The map as a medium was developed alongside modern notions of states and
-borders throughout the fifteenth and sixteenth centuries.^[] Other forms
-of data visualization, like bar and line charts, were developed over
-time to similarly convey graphically what language itself could not
-express. The earliest known use of these graphics to convey statistical
-information appeared in 1644, when a Flemish astronomer named Michael
-Florent was tasked with representing many different distances. A table
-might have sufficed to convey the raw denotation of these ^[As an
-example, see the discussion fo Michael Florent's 1644 graphic in
-@friendly2005a].
+Modern data visualization began with modernity itself. The map as a
+medium was developed first, alongside modern notions of states and
+borders throughout the fifteenth and sixteenth centuries.^[] States had
+new reasons to formally define borders through a codified text and
+recognizable medium -- the map. Other forms of data visualization, like
+bar and line charts, were developed over time to similarly convey
+graphically what language had to stretch to express. The earliest known
+use of these graphics to convey statistical information appeared in
+1644, when a Flemish astronomer named Michael Florent was tasked with
+representing many different distances. A table might have sufficed to
+convey the raw denotation of these ^[As an example, see the discussion
+fo Michael Florent's 1644 graphic in @friendly2005a].
 
 The next three hundred years brought much change to what is known as
-data visualization, but the fundamental idea of translating statistical
-concepts in graphical ideas remained the same. Technological
-advancements in reproducible printing and color usage
+data visualization, but the idea of translating statistical concepts in
+graphical ideas remained the same. Most fundamentally, the idea of
+_measurement_ to produce a graphic solidified during this time, assisted
+by both new tools and new schools of thought to guide them. As the age
+of Exploration, colonization, and the Enlightenment as a whole took
+form, so too did units of distance and time to measure and quantify
+colonizers' discoveries. First there emerged mediums to quantify raw
+distances and quantities, like maps for navigation, but soon followed
+more elaborate and abstracted forms of describing space, time, and
+everything in between. Topographical maps involving contour plots
+emerged in 1584 but became more common in the 1700s. The first known
+scatter plot emerged in 1833. John Snow in 1854 created his famous maps
+of the London cholera outbreaks, at a time when the map as a medium was
+familiar but the application of such a medium to convey statistical
+trends was not. The transformation of scales to accomodate non-uniform
+data became prominent in (1863, 1869). All of these methodological
+innovations were accompanied by technologies like color printing and
+logistical projects like nationwide censuses that cemented visualization
+as a canonical form of understanding data. Besides a brief period that
+some scholars call the "dark ages" of modern data visualization,
+discoveries like these progressed steadily from 1600 onward.
 
 Today, the accepted canon of data visualization pioneers has coalesced
-around Edward Tufte, Jacques Bertin, and John W. Tukey.
+around Edward Tufte, Jacques Bertin, and John W. Tukey.^[There are of
+course many, many scholars that laid the foundation for modern data
+visualization besides these. Some examples are.... ] Bertin, in his
+_Semiology of Graphics_, established a conceptual backbone that related
+visual elements directly to trends within data, from which other
+graphical "grammars" (including ggplot2, as mentioned below) would one
+day develop. John Tukey, in his _The Future of Data Analysis_ (1962) and
+_Exploratory Data Analysis_ (1977), argued for data analysis as a branch
+of statistics distinct from mathematical statistics and argued that
+recognizable and reproducible visualizations were key parts of
+understanding data. Edward Tufte, in _The Visual Display of Quantitative
+Information_ and many other texts, established data visualization as a
+
+These three writers, along with the
+
+To summarize, the dominant trend of data visualization has been to
+express graphically statistical arguments, or to gesture somewhat to
 
 ### Du Bois
 
 The majority of Du Bois' work would come during the aforementioned
 "modern dark ages" of data visualization, during which some scholars
-consider few methodological, technological, or artistic innovations to
-have been made.
+consider few innovations to have been made. But I hope to demonstrate
+that Du Bois' work provides ideas that are still
 
 Du Bois himself was born in Massachusetts in 1868, attending an
 integrated public school as a child before going to Fisk University in
@@ -109,7 +142,7 @@ studies to incorporate statistics into a sociological study, now a
 standard practice. More generally, Du Bois' views on statistics are ones
 that I hope to
 
-###
+# My project
 
 In the seventy-five years since Du Bois' death, technological
 advacements have given
@@ -156,17 +189,31 @@ ingredients:
 5. A theme, or aesthetic styling that are not directly related to the
    data itself.
 
-A demonstration of this logic is below. The plot is initialize with
-`ggplot()`, then an arbitrary number of geometries can be added with the
-`geom_*` syntax, and finally a theme is added for styling.
+A demonstration of this logic is shown in Block [-@lst:ggplot2]. The
+plot is initialize with `ggplot()`, then an arbitrary number of
+geometries can be added with the `geom_*` syntax, a scale is used to
+adjust how items in the data are mapped to aesthetics, and finally a
+theme is added for styling. The strength of ggplot2 lies in how the
+individual components of a graphic are separated by a plus sign (`+`),
+or in other words that visual components can be written directly through
+syntactical components. Like a linguistic grammar, this grammar allows
+for the recombination and reuse of its component "words." One could
+substitute the point geometry layer `geom_point` with a density map
+layer `geom_density`, or the provided "classic" theme with a
+black-and-white theme `theme_bw` or even a custom user-created theme.^[A
+gallery of such themes can be seen
+[here](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/).]
 
-```{#lst:ggplot2-demo .R caption="Demo of the grammar of graphics"}
+```{#lst:ggplot2 .R caption="An example of the grammar of graphics, in code."}
 library(ggplot2)
 ggplot(iris, aes(x =  Sepal.Length, y = Petal.Length, color = Species)) +
   geom_point() +
   geom_smooth() +
+  scale_color_manual(values = c("red", "blue", "green")) +
   theme_classic()
 ```
+
+![The rendered output of the `ggplot2` code.](assets/iris_example.png)
 
 The power of ggplot2 lies in taking a chaotic array of plots and
 consolidates them into a few recognizable forms. In both the
@@ -198,10 +245,21 @@ educational attainment,
 ### Data and source code
 
 Data used in the analysis and as a demonstration tool in the `ggdubois`
-package will come from several demographic sources. From the United
-States Census Bureau, I
-
-All variables will be taken for Georgia
+package will come from several demographic sources, packaged into two
+datasets. The first dataset contains time-series data at the county
+level for Georgia, containing decennial data from 1970 to 2010 on race,
+educational attainment, housing ownership, and employment. This dataset
+roughly mirrors much of Du Bois' own scope as seen in his graphics for
+the 1901 Paris Exposition. The second dataset contains nationwide
+county-level data measured in 2017, and measures median household
+income, the unemployment rate, the child poverty rate, the population of
+color, the amount of particulate matter of less than 2.5 μm in the
+atmosphere, the “rent burden” or the average proportion of income spent
+on rent, the high school graduation rate, and the Gini index for income
+inequality (B19083). This dataset aims to extend Du Bois' commentary on
+socioeconomic inequality to the national level, with data Du Bois did
+not have access to in both subject and scope.(reword) More detailed
+descriptions of these two datasets can be found in Appendix 1.
 
 The source code for the `ggdubois` package can be found at
 [https://github.com/18kimn/ggdubois](https://github.com/18kimn/ggdubois),
@@ -210,6 +268,27 @@ found at
 [https://github.com/18kimn/revisiting-dubois](https://github.com/18kimn/revisiting-dubois).
 
 # `ggdubois`
+
+The `ggdubois` package contains seven visualization extensions, a theme,
+and a color palette
+
+### `geom_scaledmap`
+
+### `geom_spike`
+
+### `geom_spiral`
+
+### `geom_spiralpath`
+
+### `geom_wrappedbar`
+
+### `geom_bibar`
+
+### `geom_wovenbar`
+
+### `theme_dubois`
+
+### `dubois_pal`
 
 # Analysis
 
