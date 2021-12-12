@@ -62,9 +62,10 @@ bar and line charts, were developed over time to similarly convey
 graphically what language had to stretch to express. The earliest known
 use of these graphics to convey statistical information appeared in
 1644, when a Flemish astronomer named Michael Florent was tasked with
-representing many different distances. A table might have sufficed to
-convey the raw denotation of these ^[As an example, see the discussion
-fo Michael Florent's 1644 graphic in @friendly2005a].
+representing several measurements of the distance between Florence and
+Rome. A table might have sufficed to convey these distances, but the
+graphic can also represent the variation and the relationship of these
+distances to each other and easily show any outliers.^[@friendly2005a]
 
 The next three hundred years brought much change to what is known as
 data visualization, but the idea of translating statistical concepts in
@@ -94,61 +95,47 @@ around Edward Tufte, Jacques Bertin, and John W. Tukey.^[There are of
 course many, many scholars that laid the foundation for modern data
 visualization besides these. Some examples are.... ] Bertin, in his
 _Semiology of Graphics_, established a conceptual backbone that related
-visual elements directly to trends within data, from which other
-graphical "grammars" (including ggplot2, as mentioned below) would one
-day develop. John Tukey, in his _The Future of Data Analysis_ (1962) and
-_Exploratory Data Analysis_ (1977), argued for data analysis as a branch
-of statistics distinct from mathematical statistics and argued that
-recognizable and reproducible visualizations were key parts of
-understanding data. Edward Tufte, in _The Visual Display of Quantitative
-Information_ and many other texts, established data visualization as a
+visual elements directly to trends within data through graphical
+components, an idea from which other graphical "grammars" (including
+`ggplot2`, as mentioned below) would one day develop. John Tukey, in his
+_The Future of Data Analysis_ (1962) and _Exploratory Data Analysis_
+(1977), argued for data analysis as a branch of statistics distinct from
+mathematical statistics and argued that recognizable and reproducible
+visualizations were key parts of understanding data. Edward Tufte, in
+_The Visual Display of Quantitative Information_ and many other texts,
+argued for the judgement of the quality of data graphics as how
+"truthfully" items in the graphic corresponded to measures in a dataset.
 
-These three writers, along with the
+### ggplot2: a grammar of graphics
 
-To summarize, the dominant trend of data visualization has been to
-express graphically statistical arguments, or to gesture somewhat to
+The persepctives of Tukey, Tufte, and Bertin are embodied today in
+software packages for data visualization. Data visualization is no
+longer a painstaking task of an artisan who must draw every point by
+hand; just as Tukey once argued for repeatable and easy-to-produce
+exploratory graphics, the simplest data graphics now can be drawn in a
+single line of code. Bertin and Tufte's emphases on deconstructing
+graphics are embodied today in the `ggplot2` library in the R
+programming language.
 
-### Du Bois
-
-The majority of Du Bois' work would come during the aforementioned
-"modern dark ages" of data visualization, during which some scholars
-consider few innovations to have been made. But I hope to demonstrate
-that Du Bois' work provides ideas that are still
-
-Du Bois himself was born in Massachusetts in 1868, attending an
-integrated public school as a child before going to Fisk University in
-Tennessee.^[Many scholars attribute Du Bois' central interest in racism
-in the South to have begun during this time.] He attended Harvard
-University for a second degree beginning in 1888, and enrolled in
-graduate study at Harvard for sociology. After receiving his degree from
-Harvard, he began a highly prolific career with various positions at
-Wilberforce University, the University of Pennsylvania, Atlanta
-University, the Tuskegee Institute, the NAACP, and others. He died in
-1963 in Ghana, while working on an encylopedia of Afria and the African
-diaspora, in exile from the U.S. for his Communist sympathies.
-
-He is known today for his massive array of contributions to the fields
-of African American studies and sociology, ranging from the first
-sociological study of a Black community in _The Philadelphia Negro_, to
-histories like _Africa: Its Place in Modern History_, to more
-theoretical texts like _The Souls of Black Folk_, and finally to
-creative and personal pieces like _Dusk of Dawn_ and _The Quest of the
-Silver Fleece_. Because of the breadth of his work,
-
-Perhaps most substantially for my project, Du Bois also had unique views
-on statistics and quantitative information that made its way into its
-work. For instance, _The Philadelphia Negro_ was one of the first
-studies to incorporate statistics into a sociological study, now a
-standard practice. More generally, Du Bois' views on statistics are ones
-that I hope to
-
-### ggplot2
-
-R is a programming language widely used in statistics and data
-visualization. Its features of being open-sourced (and thus free and
-extensible), easier to learn and write compared to some oth er
-languages, and having many native data structures and functions for
-computing models have made it popular today.
+R has become popular today for many reasons. It is designed to be more
+user-friendly than other lower-level languages, automatically handling
+memory allocation and variable typing for the ease of the user.^[The
+downside of this high-level design is that R's performance has come
+under constant criticism. Countless Medium articles have been written on
+R's performance against languages like Python, Julia, and C. This
+subject is left to a footnote as it is not the main subject of my paper,
+and the most important takeaway I feel is that despite any potential
+performance issues R is still a fairly popular language among data
+visualization professionals and statisticians.] Being designed
+specifically for statistical analysis, it has many native data
+structures and functions for computing models. For example, almost all
+data types in R are natively interpreted as some form of a vector, and
+functions for computing linear algebra are highly optimized in C++
+before being ported to R. Likely the largest contributor for R's
+popularity has been its open-sourced nature. As well as being free, a
+considerable advantage compared to languages like Stata and SAS that can
+cost hundreds or thousands of dollars a year, being open-sourced means
+that user extensions are at the core of R's functionality.
 
 One especially important extension in R is the `ggplot2` library and the
 ecosystem of user-contributed software packages it has spawned. The
@@ -233,35 +220,127 @@ Force networks are just one example of ggplot2's general limitation. By
 consolidating graphics into a few recognizable forms and rules, ggplot2
 leaves out others. In some cases, like not including animated forms,
 this is mostly "accidental." It doesn't contradict the logic of ggplot2
-to extend it with the axis of time, and animation could very well have
-just been left out of the `ggplot2` package simply to limit the
+to extend it with the axis of time, and thus animation could very well
+have been left out of the `ggplot2` package simply to limit the
 package's scope. Other cases, like having positions of geometries not
 depend on data itself but be determined through a random or simulated
-process, are not part of the `ggplot2` logic and contradict existing
-aspects.
+process, contradict the existing `ggplot2` assumption of having a
+defined scale.
 
-The community-prescribed solution both of these limitations has been to
-extend `ggplot2` with additional functionality and in the process rework
-the `ggplot2` grammar. The `gganimate` package was created to handle
-transitions, and is now maintained by one of the maintainers of the
-ggplot2 core library.^[the `gganimate` package and other animation
-packages in R create animations notably in a limited and
-performance-inefficient way compared to many tools. These animations by
-simply appending many individual animations together, whereas web-based
-and OpenGL-based animation tools can use optimized rendering engines to
-create animations faster and with smaller file sizes. This is an issue I
-hope will be improved on for R in the future, but as it is not directly
-relevant to my project I will leave this to a footnote.] Other
-libraries, like `ggigraph`, `gggraph`, `geomnet`, and others have
-extended ggplot2's functionality to visualize
+The community-prescribed solution to both of these types of limitations
+has been to extend `ggplot2` with additional functionality and in the
+process rework the `ggplot2` grammar. The `gganimate` package was
+created to handle transitions, and is now maintained by one of the
+maintainers of the ggplot2 core library.^[the `gganimate` package and
+other animation packages in R create animations notably in a limited and
+performance-inefficient way compared to many tools. `gganimate` creates
+animations by simply appending many individual frames together, whereas
+web-based and OpenGL-based animation tools can use optimized rendering
+engines to create animations faster and with smaller file sizes. This is
+an issue I hope will be improved on for R in the future, but as it is
+not directly relevant to my project I will leave this to a footnote.]
+Other libraries, like `ggigraph`, `gggraph`, `geomnet`, `ggforce`, and
+others have extended ggplot2's functionality to visualize network graphs
+and other geometries that do not map perfectly to an _x/y_ coordinate
+plane.
 
-These extensions take a pragmatic position on the grammar of graphics
+These extensions take a pragmatic position on the grammar of graphics.
+The grammar itself has done much work on its own to bring a coherent
+logic of data visualization to R, but it just as much deserves to be
+critiqued and extended as it does to be praised. The inventors of the
+original grammar of graphics contributed one monumental perspective, but
+we need additional perspectives.
 
-To return finally to Du Bois' perspectives on data visualization, it is
-often not enough to rely only on canonical forms of charts that we can
-see as a standard form in academic texts. Data visualization has to be
-expressive, stretching beyond the unified abstractions to more diverse
-(if chaotic) forms as well.
+### Du Bois
+
+Enter W.E.B. Du Bois. The majority of Du Bois' work would come during
+the aforementioned "modern dark ages" of data visualization, during
+which some scholars consider few innovations to have been made. But as I
+will argue in this section, Du Bois's perspectives and practice of data
+visualization greatly preceded his time, and offers much to the data
+visualization world even today.
+
+Du Bois himself was born in Massachusetts in 1868, attending an
+integrated public school as a child before going to Fisk University in
+Tennessee.^[Many scholars attribute Du Bois' central interest in racism
+in the South to have begun during this time.] He attended Harvard
+University for a second degree beginning in 1888, and enrolled in
+graduate study at Harvard for sociology. After receiving his degree from
+Harvard, he began a highly prolific career with various positions at
+Wilberforce University, the University of Pennsylvania, Atlanta
+University, the Tuskegee Institute, the NAACP, and others. He died in
+1963 in Ghana, while working on an encylopedia of Afria and the African
+diaspora, in exile from the U.S. for his Communist sympathies.
+
+He is known today for his massive array of contributions to the fields
+of African American studies and sociology, ranging from the first
+sociological study of a Black community in _The Philadelphia Negro_, to
+histories like _Africa: Its Place in Modern History_, to more
+theoretical texts like _The Souls of Black Folk_, and finally to
+creative and personal pieces like _Dusk of Dawn_ and _The Quest of the
+Silver Fleece_. He pushed on the boundaries of all of these fields,
+providing new theories and questioning existing ones. This, combined
+with the breadth of his work in many different fields, lead some to call
+Du Bois "The Grandfather of Black Studies."
+
+Perhaps most substantially for my project, Du Bois also had unique views
+on statistics and quantitative information that are reflected in his
+work. For instance, _The Philadelphia Negro_ was one of the first
+studies to incorporate statistics into a sociological study, now a
+standard practice. For data visualization, these views can be seen most
+clearly in Du Bois' work in the 1900 Paris Exposition, a world's fair
+commerating the technological and social achievements of the 19th
+century. Du Bois collaborated with Daniel Murray, the Assistant
+Librarian of Congress at the time, and a lawyer named Thomas Calloway to
+bring some five hundred photographs and statistical charts in a special
+room titled "The Exhibit of American Negroes." Strangely alongside
+eugenicist "human zoos" at the Exposition that argued for the
+superiority of the white race, Du Bois attempted to show to some 50
+million visitors the life and historical trajectory of Black people in
+America.^[50 million visitors may sound like quite a lot, but the size
+and popularity of these world's fairs cannot be understated. See
+@rydell2013 for more information.]
+
+Du Bois' graphics broke both practical and epistemological ground.
+Though his graphics came during the "Dark Ages of data visualization" as
+described by some, Du Bois still brought to the Exposition many types of
+shapes that had never been employed before. Like the photographs that
+were presented alongside them, these graphics for Du Bois represented on
+one hand objective events that must be seen, and an expressive and
+creative medium of displaying them that was just as important as any
+underlying factual quality. For Du Bois, it wasn't enough to convey, for
+example, the growth of property ownership of Black people as a simple
+bar chart. Du Bois saw variables like these as historical processes,
+where one year's data was inseparable from a previous year's, and
+conveyed this with the imagery of jagged spikes connecting each year's
+data with each other. This balance of the objective with the subjective
+and creative would go on to color much of Du Bois' life, leading him to
+comment later in works like _Dusk of Dawn_ that he had embarked on a
+journey from "a scientist to... a master of propaganda."
+
+Compared to Tufte's perspective on valuing whichever graphic most
+closely portrays some objective idea of truth, Du Bois recognizes that
+all visualizations are arguments and should be treated as such, with
+graphical elements being chosen to best use such an argument. While not
+
+There has been a substantial amount of work exploring Du Bois' work
+here. The most influential of these has been Whitney Battle-Baptiste and
+Britt Russert's _W.E.B. Du Bois' Data Portraits_, an annotated catalog
+of Du Bois' statistical graphics at the Exposition that has inspired a
+host of other works.^[@amherst2018; @fusco2021;
+@karduniBoisWrappedBar2020; @zotero-248; @zotero-254]
+
+To sum up the above review, the
+
+- emphasis on truth (tufte)
+- emphasis on components and a grammar (bertin, ggplot2)
+- emphasis on exploratory analysis (tukey, ggplot2)
+
+du bois' departures:
+
+- emphasis on expressiveness
+- additions to the components and the grammar
+- an integration of exploration and analysis (ok, that's just tukey)
 
 # Methods
 
@@ -365,10 +444,14 @@ ggplot(georgia, aes(x = year, y = high_school_grads)) +
 
 This is fairly different from a traditional map of a continuous
 variable, which often colors sections of a polygon instead of repeatedly
-drawing a polygon with modifications. Traditional maps would tell
-viewers about the geographic distribution of a particular process,
-
-Like many of the geoms shown below, this
+drawing a polygon with modifications. Traditional maps would in this way
+tell viewers about the geographic distribution of a particular process,
+but `geom_scaledmap()` does not convey information about the geographic
+distribution of a process, and only simply relates a process with a
+geography. Viewers do not see how educational attainment in Georgia
+varies throughout the county, but viewers are instead presented with the
+association of the physical shape of Georgia with this set of measures
+on educational attainment.
 
 ### `geom_spike`
 
@@ -384,7 +467,13 @@ ggplot(georgia, aes(x = year, y = high_school_grads)) +
   geom_spike()
 ```
 
-This geom was inspired by plate 22 of _Data Portraits_,
+This geom was inspired by plate 22 of _Data Portraits_, shown alongside
+the rendered output of [@lst:spike] below. Here, spikes take on a
+slightly more violent shape, with serrated marks stabbing into circles
+at the center. This graphic argues that one years' data stems from
+previous years' data, as opposed to being completely separated measures.
+In the context of my graphic, Georgia in 2000 is very much tied to
+Georgia in 1990.
 
 A quirk about this geom and the `geom_spiral` function that follows is
 that in order to be understood within the `ggplot2` framework, the
@@ -395,9 +484,92 @@ coordinates to pixel positions are handled separately.
 
 ### `geom_spiral`
 
-### `geom_spiralpath`
+`geom_spiral()` is inspired by Plate 25 from _Data Portraits_. This
+geometry is likely Du Bois' most famous, providing the title for the
+_Data Portraits_ text and being the subject of a #tidytuesday tag on
+Twitter.^[Responses and recreations to this tag can be seen at
+[https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-02-16/readme.md](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-02-16/readme.md)].
+The shape receives again one discrete variable and one continuous
+variable, and plots one bar for each group in a circular motion. The
+bars gradually curve inwards, so that a bar that wraps around the circle
+more than once will not intersect with itself but instead appear one
+level inward. The number of times that the bars will wrap can be
+adjusted by the user through the `nWrap` parameter supplied to
+`geom_spiral`.
+
+An example of this is shown below. The `geom_spiral()` is substituted
+into otherwise the same syntax as the above geometries, a testament to
+the modular nature of `ggplot2`. The caveat to this modular nature is
+that to achieve the same spiral nature as Du Bois' drawings, the
+`coord_polar()` coordinate system must be applied. Without
+`coord_polar()`, a completely different (and in this case mostly
+nonsensical and undesired) graphic results).
+
+```{#lst:spiral .R caption="geom_spiral()"}
+ggplot(georgia, aes(x = year, y = high_school_grads)) +
+  geom_spiral() +
+  coord_polar()
+```
+
+The spiral shape is one of Du Bois' many responses to the issue of
+scale. Demographic variables like income or raw population counts
+usually vary wildly, requiring the use of either focusing on only a
+certain range or log-transforming the data before plotting. Du Bois
+provides an alternative strategy, making use of spirals to compactly
+wrap bars. With the spiral, quantities that are many times larger than
+others can be represented in geometrically accurate terms, meaning the
+area occupied by a bar is directly proportional to the quantity it
+represents.
+
+### `geom_pathspiral`
+
+The path-spiral geometry is inspired by Plate 11 from Du Bois'
+exhibition. Like the spiral geometry above, this shape is an answer to
+the problem of scale, compactly wrapping a bar so that one category's
+measure may be displayed alongside other categories' measures. Unlike
+the spiral geometry shape, this shape only applies the spiral for a
+single category, leaving the rest of the categories to be represented in
+linear segments. The first linear segment is a horizontal line, and then
+each segment following this are connected at alternating +45^\circ and
+-45^\circ angles.
+
+An example of this is shown below. Like the `geom_spiral` function,
+`geom_pathspiral` requires
+
+```{#lst:pathspiral .R caption="geom_pathspiral()"}
+ggplot(georgia, aes(x = year, y = high_school_grads)) +
+  geom_pathspiral() +
+  coord_polar()
+```
+
+The result of this path-spiral pattern is that while the category
+associated with the largest value is made more compact by being wrapped
+around itself, the other segments take up even more room than they would
+on a normal coordinate plane, by stretching diagonally across the panel.
+Because the segments themselves do not occupy much area, Du Bois leaves
+much white space in between segments to add annotations like the name of
+a category and its associated value. My geometry does not add any
+annotations, but users are free to add their own through the `geom_text`
+and `geom_label` elements from `ggplot2`.
+
+In this geometry Du Bois also unites polar coordinate systems and
+cartesian coordinate systems. The shorter line segments do not fit
+neatly on a polar coordinate system that the spiral geometry might
+imply, and the actual implementation of `geom_pathspiral` handles
+trigonometry under the hood so that users can avoid this issue. This
+geometry illustrates some creative shapes we might gain if we were to
+break out of the more limited coordinate system ggplot2 allows, taking
+parts from different coordinate systems as it suits our purpose.
 
 ### `geom_wrappedbar`
+
+A simpler alternative to the question of scale is presented by Du Bois
+in Plates 17 and 26. While Du Bois adjusts for large quantities in some
+cases by wrapping bars around in a spiral fashion, as we see above, in
+other cases Du Bois addresses this issue by wrapping a bar over several
+rows and keeping data on the cartesian plane.
+
+This is also one of the geometries explored
 
 ### `geom_bibar`
 
