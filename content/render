@@ -12,6 +12,7 @@ pandoc -V geometry:margin=1in \
   --csl=references/chicago-note-bibliography-with-ibid.csl \
   -V mainfont="EB Garamond" \
   -V monofont="Fira Code" \
+  -V mathfont="Garamond-Math" \
   -V fontsize=12pt \
   --highlight-style=code_style.theme \
   --pdf-engine=xelatex \

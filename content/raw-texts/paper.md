@@ -513,28 +513,33 @@ ggplot(georgia, aes(x = year, y = high_school_grads)) +
 
 The spiral shape is one of Du Bois' many responses to the issue of
 scale. Demographic variables like income or raw population counts
-usually vary wildly, requiring the use of either focusing on only a
-certain range or log-transforming the data before plotting. Du Bois
-provides an alternative strategy, making use of spirals to compactly
-wrap bars. With the spiral, quantities that are many times larger than
-others can be represented in geometrically accurate terms, meaning the
-area occupied by a bar is directly proportional to the quantity it
-represents.
+usually vary wildly, often producing a graph with one or two very, very
+long bars and leaving other bars to be almost invisible. This would also
+handle space inefficiently on a panel, leaving much white space where
+smaller quantities are not displayed. One strategy for these cases has
+been the use of either focusing on only a certain range of values, or
+log-transforming the data before plotting. Du Bois provides an
+alternative strategy, making use of spirals to compactly wrap bars. With
+the spiral, quantities that are many times larger than others can be
+represented in geometrically accurate terms, meaning the area occupied
+by a bar is directly proportional to the quantity it represents. But
+unlike traditional bar plots where some bars might dwarf others, in the
+spiral geometry Du Bois can efficiently have longer bars take up white
+space that smaller bars do not use. Because of this, all quantities can
+usually be presented alongside each other.
 
 ### `geom_pathspiral`
 
 The path-spiral geometry is inspired by Plate 11 from Du Bois'
 exhibition. Like the spiral geometry above, this shape is an answer to
-the problem of scale, compactly wrapping a bar so that one category's
-measure may be displayed alongside other categories' measures. Unlike
-the spiral geometry shape, this shape only applies the spiral for a
-single category, leaving the rest of the categories to be represented in
-linear segments. The first linear segment is a horizontal line, and then
-each segment following this are connected at alternating +45^\circ and
--45^\circ angles.
-
-An example of this is shown below. Like the `geom_spiral` function,
-`geom_pathspiral` requires
+the problem of scale, compactly wrapping a bar so that categories
+associated with different values may be presented alongside each other,
+no matter if one category is many times larger than another. Unlike the
+spiral geometry shape, this shape only applies the spiral for a single
+category, leaving the rest of the categories to be represented in linear
+segments. The first linear segment is a horizontal line, and then each
+segment following this are connected at alternating $+45^\circ$ and
+$-45^\circ$ angles.
 
 ```{#lst:pathspiral .R caption="geom_pathspiral()"}
 ggplot(georgia, aes(x = year, y = high_school_grads)) +
@@ -565,19 +570,155 @@ parts from different coordinate systems as it suits our purpose.
 
 A simpler alternative to the question of scale is presented by Du Bois
 in Plates 17 and 26. While Du Bois adjusts for large quantities in some
-cases by wrapping bars around in a spiral fashion, as we see above, in
-other cases Du Bois addresses this issue by wrapping a bar over several
-rows and keeping data on the cartesian plane.
+cases by wrapping bars around in a spiral fashion, as we see above, Du
+Bois also addresses this issue by wrapping a bar over several rows and
+keeping data on the cartesian plane. This has the benefit of having
+coordinate axes that are much more intuitively understood than a
+_radian/theta_ combination that the `geom_spiral` geometry is plotted
+along. Karduni et. al have found that this strategy increases the
+accuracy of identifying values associated with bars, by on average 10.32
+percentage points.^[@karduniBoisWrappedBar2020. I believe this is also
+the only instance of a geometry created by Du Bois being studied in an
+experimental study.]
 
-This is also one of the geometries explored
+The `ggdubois` implementation of this shape is in the `geom_wrappedbar`
+geometry. This receives again one discrete variable and one continuous
+variable as inputs, and creates a bar chart where all categories with
+values extending beyond a threshold are wrapped around the length of the
+panel. The default value for this threshold is one and a half times the
+length of the second-largest category for the width of one "cycle" of
+the bar, and users can supply alternative values through the optional
+"width" parameter.
 
-### `geom_bibar`
+```{#lst:wrappedbar .R caption="geom_wrappedbar()"}
+ggplot(georgia, aes(x = year, y = high_school_grads)) +
+  geom_wrappedbar()
+```
 
 ### `geom_wovenbar`
 
+`geom_wovenbar` is inspired by Plate 23 of Du Bois's exhibition. It
+receives four variables: one continuous variable, two discrete variables
+with any number of levels, and one binary variable. Du Bois then
+interweaves two plots, one for each value of the binary variable. Each
+plot uses the two discrete variables as independent variables and uses
+the continuous variable as a response variable, drawing a bar for each
+possible level of the discrete variables. For a clearer explanation, see
+the graphic below.
+
+```{#lst:wovenbar .R caption="geom_wovenbar()"}
+ggplot(georgia, aes(x = year, y = value, group = relationship_type, fill = location )) +
+  geom_wrappedbar()
+```
+
+Here, the continuous variable is mapped to `y`, the binary variable is
+mapped to `group`, and the two discrete variables are mapped to `x` and
+`fill`.
+
+Du Bois provides two insights in this shape. The first lies in
+incorporating four variables into a single graphic, a feat that is
+usually fairly difficult but is important for seeing interactions of
+several variables at once.
+
+The second insight Du Bois provides is the woven nature of these bars,
+that suggest an almost physical connection between the categories
+pictured. Du Bois recognized that the number of property owners and the
+amount of property owned were not two separate concepts, but
+manifestations of a single concept of property ownership.
+
+In return for the above two strategies, the `geom_wovenbar` graphic is
+possibly Du Bois' most complex shape. Especially compared to shapes
+natively provided by `ggplot2`, like a simple bar plot, this plot
+requires the reader to pause and digest each variable. This plot also
+does away with parts of the `ggplot2` grammar, like the association of
+one variable for a horizontal plane and one variable for a vertical
+plane (i.e. one _x_ variable and one _y_ variable), here Du Bois uses
+both a discrete variable and continuous variable for the _x_-axis, and
+then reverses this combination for the _y_-axis.
+
+### `geom_square`
+
+The last geometry contributed by my package is the `geom_square`
+function, inspired by Plate 51 of Du Bois' exhibition. It receives two
+continuous variables^[Both variables may also be ordered factor
+variables are that are not truly "continuous" and only have a few
+values; these will be interpreted as continuous variables. Du Bois uses
+the ordinal variable of year in this way, whereas in other graphics year
+is used as a discrete variable to group separate geometries.] and one
+categorical variable, and draws a square in which the two continuous
+variables order the _x_ and _y_ axes, and the categorical variable
+determines the colors and heights of different sections of the square.
+
+An example is shown in the code snippet and graphic below. Here, the
+categorical variable is occupation, and the continuous variables are
+time and the percent of the total population that each occupation is
+associated with.
+
+```{#lst:square .R caption="geom_square()"}
+ggplot(georgia, aes(x = year, y = percent_population, fill = occupation)) +
+  geom_wrappedbar()
+```
+
+This graphic makes a visual argument for the tight connections between
+groups. Different occupations, for example, are not entirely different
+groups but sections of one whole.
+
 ### `theme_dubois`
 
+Besides geometries, `ggdubois` also provides utilities for creating
+graphics in the style of W.E.B. Du Bois. The first is a theme, which can
+be appended to a `ggplot2` object to apply styling related to spacing
+between plot elements, the grid lines of the plot, the plot typography,
+and certain baseline colors. Themes are overridable, meaning that users
+can use `theme_dubois` as a baseline theme and then tweak aesthetics as
+the user best sees fit.
+
+```{#lst:theme .R caption="theme_dubois()"}
+ggplot(georgia, aes(x = year, y = percent_population, fill = occupation)) +
+  geom_wrappedbar() +
+  theme_dubois()
+```
+
 ### `dubois_pal`
+
+The other non-geometric utility that `ggdubois` provides is a set of
+color palettes: one divergent palette and one sequential palette, as
+well as convenience functions for creating continuous color scales that
+interpolate colors between the ones provided.
+
+The divergent palette is taken without modification from Anthony Sparks'
+Data Portraits project that reproduces many of Du Bois' works.^[This is
+permissible under the Creative Commons Attribution-NonCommercial License
+4.0, see
+https://github.com/ajstarks/dubois-data-portraits/blob/master/LICENSE.md.]
+Of particular note are the red, green, and black colors that are often
+paired together in Du Bois' plates, which represent the colors of the
+Pan-African flag. Du Bois was a prominent advocate of movements like the
+Pan-African movement for unity against the colonial powers, related to
+his famous statement that the "problem of the 20th century is the
+problem of the color line."
+
+The sequential color palette is inspired by Du Bois' colors from Plate
+54, where he describes the proportion of the population that is
+mixed-race. For Du Bois, race is not a biological construct but an
+imagined one, created by political and social acts of representation. He
+communicates this here and tries to stretch beyond static or fixed ideas
+of both scales and race, using gradients at the boundaries of each
+polygon to symbolize how these categories are often blurry. I try to
+convey this perspective by providing a continuous gradient scale, as
+opposed to any fixed set of categories.
+
+```{#lst:palettes .R caption="ggdubois color paletes."}
+dubois_pal(4) # by default, returns a divergent color scale
+dubois_pal(10, type = "sequential")
+ggplot(aes(x = median_income, y = high_school_graduates)) +
+  geom_point() +
+  scale_color_gradientn(colors = dubois_pal(10))
+# the above is equivalent to the slightly more conveient syntax of:
+ggplot(aes(x = median_income, y = high_school_graduates)) +
+  geom_point() +
+  scale_color_dubois()
+```
 
 # Analysis
 
