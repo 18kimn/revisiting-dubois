@@ -709,13 +709,15 @@ convey this perspective by providing a continuous gradient scale, as
 opposed to any fixed set of categories.
 
 ```{#lst:palettes .R caption="ggdubois color paletes."}
-dubois_pal(4) # by default, returns a divergent color scale
+# by default, returns a divergent color scale
+dubois_pal(4)
+# but can return a sequential color scale, e.g. with colors on a continuum
 dubois_pal(10, type = "sequential")
-ggplot(aes(x = median_income, y = high_school_graduates)) +
+ggplot(georgia, aes(x = median_income, y = high_school_graduates)) +
   geom_point() +
   scale_color_gradientn(colors = dubois_pal(10))
 # the above is equivalent to the slightly more conveient syntax of:
-ggplot(aes(x = median_income, y = high_school_graduates)) +
+ggplot(georgia, aes(x = median_income, y = high_school_graduates)) +
   geom_point() +
   scale_color_dubois()
 ```
