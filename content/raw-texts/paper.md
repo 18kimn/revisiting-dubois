@@ -13,45 +13,28 @@ header-includes:
 # Introduction
 
 Prolific and prominent Black writer, historian, professor, political
-activist, W.E.B. Du Bois has left a legend in many ways. One profound
-way as been in developing and articulating data visualizations many
-years before canonical pioneers of visualization like Edward Tufte,
-Jacques Bertin, or Stephen Few. My project seeks to explore his work
-with a critical and quantitative lens. I hope to bring to Du Bois'
-portraits the worlds of modern statistics, computing resources, and
-interactive visualization, but also to these fields bring Du Bois'
-humanist lens and the goal of visualizing data to create a better world.
+activist, W.E.B. Du Bois has left a legend in many ways. In addition to
+being a sociologist who meticulously drew and recorded social statistics
+for over fifty years, Du Bois was also a Black theorist of knowledge, an
+educator, a novel writer, and a historian. Some of these perspectives
+are visible in his approach to data visualization. While other data
+visualization pioneers like Edward Tufte try to objectively gauge the
+value of a dataset as the proportion to which it represents "truth," Du
+Bois recognizes visualization as a creative endeavor alongside
+photography and historical analysis.
 
-To do so, my project will focus on two questions:
-
-1. **How does Du Bois' approach to data visualization depart from
-   canonical views of data and information?**
-
-In addition to being a sociologist who meticulously drew and recorded
-social statistics for over fifty years, Du Bois was also a Black
-theorist of knowledge, an educator, a novel writer, and a historian.
-Some of these perspectives are visible in his approach to data
-visualization. While other data visualization pioneers like Edward Tufte
-try to objectively gauge the value of a dataset as the proportion to
-which it represents "truth," Du Bois recognizes visualization as a
-creative endeavor alongside (quite literally, in the case of the Paris
-Exposition) photography and historical analysis. In extending Du Bois'
-data visualization through practical tools, I hope to also convey his
-artistic perspective on data visualization.
-
-2. **How have the subjects of Du Bois' works in the 1900 Paris
-   Exposition evolved over time?**
-
-Du Bois was concerned with the "afterlives" of slavery and prospects of
-Black people in the American South after emancipation in 1865, and he
-provided answers by studing land ownership, occupations, income, and
-geographic concentration. How does the same topic of the afterlife of
-slavery in land ownership, occupations, income, and geographic
-dispersion look like in the contemporary age?
+My project seeks to explore his work with a critical and quantitative
+lens. I hope to bring to Du Bois' portraits the worlds of modern
+statistics, computing resources, and clearly defined systems of
+visualization, but also to these fields bring Du Bois' humanist,
+expressive lens. To do so, I began development on the `ggdubois`
+graphics library for data visualization in the R programming language.
+In extending Du Bois' data visualization through practical tools, I hope
+to also convey his artistic perspective on data visualization.
 
 # Background
 
-### Data visualization through the centuries
+### A short history of data visualization
 
 Modern data visualization began with modernity itself. The map as a
 medium was developed first, alongside modern notions of states and
@@ -247,16 +230,18 @@ plane.
 These extensions take a pragmatic position on the grammar of graphics.
 The grammar itself has done much work on its own to bring a coherent
 logic of data visualization to R, but it just as much deserves to be
-critiqued and extended as it does to be praised. The inventors of the
-original grammar of graphics contributed one monumental perspective, but
-we need additional perspectives.
+critiqued and extended as it does to be praised. With `ggplot2` and the
+world of data visualization at large, relying on a few monumental
+perspectives have meant neglecting others.
 
 ### Du Bois
 
-Enter W.E.B. Du Bois. The majority of Du Bois' work would come during
-the aforementioned "modern dark ages" of data visualization, during
-which some scholars consider few innovations to have been made. But as I
-will argue in this section, Du Bois's perspectives and practice of data
+It is with this mindset that I turn to W.E.B. Du Bois, whose graphics I
+believe contributes many different perspectives on expressive display of
+information. The majority of Du Bois' work would come during the
+aforementioned "modern dark ages" of data visualization, during which
+some scholars consider few innovations to have been made. But as I will
+argue in this section, Du Bois's perspectives and practice of data
 visualization greatly preceded his time, and offers much to the data
 visualization world even today.
 
@@ -318,36 +303,58 @@ and creative would go on to color much of Du Bois' life, leading him to
 comment later in works like _Dusk of Dawn_ that he had embarked on a
 journey from "a scientist to... a master of propaganda."
 
-Compared to Tufte's perspective on valuing whichever graphic most
-closely portrays some objective idea of truth, Du Bois recognizes that
-all visualizations are arguments and should be treated as such, with
-graphical elements being chosen to best use such an argument. While not
-
 There has been a substantial amount of work exploring Du Bois' work
 here. The most influential of these has been Whitney Battle-Baptiste and
 Britt Russert's _W.E.B. Du Bois' Data Portraits_, an annotated catalog
 of Du Bois' statistical graphics at the Exposition that has inspired a
 host of other works.^[@amherst2018; @fusco2021;
-@karduniBoisWrappedBar2020; @zotero-248; @zotero-254]
+@karduniBoisWrappedBar2020; @smith2000; @artspacenewhaven. This text, as
+well as the recent Artspace New Haven exhibit on Du Bois' graphics in
+partnership with the text's authors, served as the inspiration for this
+project.] Anthony Starks, creator of the Go-based `deck` package for
+data visualization, began recreating Du Bois' graphics around the same
+time, leading many others in the data visualization community to do so
+as well.^[See <https://github.com/ajstarks/dubois-data-portraits> for
+Starks' work, @starks2021 for his commentary, and @a2019; @allen2021;
+@am for a few examples of explorations that followed.].
 
-To sum up the above review, the
+My project seeks to join this discussion with a Du Bois-inspired system
+of data visualization. As opposed to being a set of recreations, my
+project's main contribution is a set of tools for creating graphics.
+These tools are reusable, in that they can be installed in the R
+programming language through a single line of code, and a user's first
+graphics can come soon after that. They are also repurposeable and
+extendible, with interfaces to modify their function.
 
-- emphasis on truth (tufte)
-- emphasis on components and a grammar (bertin, ggplot2)
-- emphasis on exploratory analysis (tukey, ggplot2)
+I hope to show through this project Du Bois' choice of creative design
+over pure functionality, and how it might be useful for the data
+visualization community at large. As will be discussed further below, Du
+Bois often departs from the central paradigms of the grammar of
+graphics. He combines polar and cartesian coordinate systems together,
+which stretches against the notion of a single positional scale that
+`ggplot2` and the grammar of graphics rely on. He picks unusual axes to
+manipulate, like the area of a spatial feature, or new ways to
+manipulate existing ones, like "wrapping" a bar around itself when it
+reaches the end of a panel.
 
-du bois' departures:
-
-- emphasis on expressiveness
-- additions to the components and the grammar
-- an integration of exploration and analysis (ok, that's just tukey)
+These often address practical problems in data visualization, like how
+to display items that are much larger than others. But more
+fundamentally, Du Bois brings a creative and open view of data
+visualization. Other thinkers like Edward Tufte rigidly assessed the
+value of a graphic by how well it approximates a single "truth," leading
+to the consolidation of data visualization towards those that most
+clearly approximate that single truth. Systems like `ggplot2` further
+this, delineating clear rules and templates that lead to the
+canonization of certain graphics over others. Du Bois' graphics ask us
+to consider an alternative, showing that there are many, many valuable
+ways to represent a particular set of data.
 
 # Methods
 
 ### `ggdubois`: An extension for ggplot2
 
-The first contribution of my project is to create an R package extending
-W. E. B. Du Bois' data visualizations to present day.
+The graphics library is built using the aforementioned "grammar of
+graphics" implemented by the `ggplot2` package in R.
 
 The majority of `ggdubois` contains additional geometries, or geoms,
 through which new shapes in the `ggplot2` framework can be created. In
@@ -357,6 +364,29 @@ In other cases, this required reaching into the `grid` package over
 which `ggplot2` itself was built, and adding completely new shapes for
 `ggplot2`.
 
+These geometries, or geoms, are:
+
+1. `geom_scaledmap`, which represents a variable through the inflated or
+   deflated area of a spatial feature on a map.
+
+2. `geom_spike`, which represents quantities of a variable through rings
+   that are connected by spikes.
+
+3. `geom_spiral`, which represents quantities of a variable through a
+   spiral shape.
+
+4. `geom_pathspiral`, which represents quantities of a variable through
+   a combination of a spiral and connected segments.
+
+5. `geom_wrappedbar`, or a bar chart that wraps quantities onto the next
+   row after the exceed a certain quantity.
+
+6. `geom_wovenbar`, which interweaves two different bar charts on the
+   same plane.
+
+7. `geom_square`, which represents quantities of a variable through a
+   filled square.
+
 Besides new geometries, `ggdubois` contains two additional tools. The
 first is a theme, which can be applied to any `ggplot2` object and will
 replace existing the styling of that plot's text, colors, and outline
@@ -365,49 +395,40 @@ Exposition. The second is a color palette, which is used in the theme
 but can also be used separately to color arbitrary graphics and plots
 with R.
 
-### Bayesian analysis
-
-My project seeks to extend Du Bois' works not only with modern graphical
-tools, but also with modern analysis tools. In much the same way, I hope
-to convey the spirit of Du Bois' analyses with the methodological
-advancements he did not have.
-
-In my view, much of his perspective can be seen in nonparametric testing
-and analyses.
-
-- one where a theoretical result is derived probabilistically in tandem
-  with the data (continually updated), instead of assuming that a point
-  value for a parameter exists independent of the data at hand
-- repeated, continually updated inference <-> critical theory and
-  self-critique
-  - MCMC?
-
-I will run a set of Bayesian hierarchical time-series model to
-investigate Du Bois' main research questions of property ownership,
-educational attainment,
-
 ### Data and source code
 
-Data used in the analysis and as a demonstration tool in the `ggdubois`
-package will come from several demographic sources, packaged into two
-datasets. The first dataset contains time-series data at the county
-level for Georgia, containing decennial data from 1970 to 2010 on race,
+The `ggdubois` package uses and provides data from several
+administrative sources. These have been packaged into two datasets.
+
+The first dataset contains time-series data at the county level for
+Georgia, containing decennial data from 1970 to 2000 on race,
 educational attainment, housing ownership, and employment. This dataset
 roughly mirrors much of Du Bois' own scope as seen in his graphics for
-the 1901 Paris Exposition. The second dataset contains nationwide
-county-level data measured in 2017, and measures median household
-income, the unemployment rate, the child poverty rate, the population of
-color, the amount of particulate matter of less than 2.5 μm in the
-atmosphere, the “rent burden” or the average proportion of income spent
-on rent, the high school graduation rate, and the Gini index for income
-inequality (B19083). This dataset aims to extend Du Bois' commentary on
-socioeconomic inequality to the national level, with data Du Bois did
-not have access to in both subject and scope.(reword) More detailed
-descriptions of these two datasets can be found in Appendix 1. For the
-rest of this paper, the first dataset will be referred to as `georgia`
-and the second will be referred to as `demographics`.
+the 1901 Paris Exposition. This dataset contains geographic features as
+well for each county or requivalents. The data here were provided by the
+International Public Use Microdata Services (IPUMS) project at the
+University of Minnesota, which assembles and transforms data to a common
+standard across many geographies and periods in time. The variables in
+this dataset originally came from the U.S. decennial Census, the
+TIGER/LINE program for shapefiles, and the annual American Community
+Survey, which are all programs administered by the United States Census
+Bureau.
 
-The source code for the `ggdubois` package can be found at
+The second dataset contains nationwide county-level data measured in
+2015, and measures median household income, the unemployment rate, the
+child poverty rate, the population of color, the amount of particulate
+matter of less than 2.5 μm in the atmosphere, the “rent burden” or the
+average proportion of income spent on rent, the high school graduation
+rate, and the Gini index for income inequality. This dataset aims to
+extend Du Bois' commentary on socioeconomic inequality to the national
+level, with data Du Bois did not have access to in both subject and
+scope. More detailed descriptions of these two datasets can be found in
+Appendix 1. For the rest of this paper, the first dataset will be
+referred to as `georgia` and the second will be referred to as
+`demographics`.
+
+These data as well as all source code for the `ggdubois` package can be
+found at
 [https://github.com/18kimn/ggdubois](https://github.com/18kimn/ggdubois),
 and the source code for this paper and the associated analyses can be
 found at
@@ -433,14 +454,27 @@ above, year from 1970 to 2000 is used as a discrete variable and the
 proportion of high school graduates is used as a continuous
 variable.^[Note that, as as idiomatic in `ggplot2`, the information
 encoding geometric columns is automatically detected by
-`geom_scaledmap`.] Georgia is plotted four times, one for each specified
-year, and scaled to the relative size of proportion of high school
-graduates.
+`geom_scaledmap`.] Fulton County, Georgia is plotted four times, one for
+each specified year, and scaled to the relative size of proportion of
+high school graduates.
 
-```{#lst:scaledmap .R caption="geom_scaledmap()"}
-ggplot(georgia, aes(x = year, y = high_school_grads)) +
-  geom_scaledmap()
+```{#lst:scaledmap .R caption="Syntax of geom_scaledmap()"}
+fulton_county <- filter(georgia, fips == "13121")
+ggplot(fulton_county, aes(x = edu)) +
+  geom_scaledmap() +
+  facet_wrap(~year) +
+  labs(
+    title = "High school graduates in Fulton County, Georgia",
+  )
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/scaledmap.png}
+\end{center}
+
+![`geom_scaledmap`](assets/dubois/scaledmap.png){height=45% margin=0}
 
 This is fairly different from a traditional map of a continuous
 variable, which often colors sections of a polygon instead of repeatedly
@@ -463,9 +497,18 @@ supplied continuous variable. "Spikes" extend from outer layers into
 inner ones.
 
 ```{#lst:spike .R caption="geom_spike()"}
-ggplot(georgia, aes(x = year, y = high_school_grads)) +
-  geom_spike()
+ggplot(georgia, aes(x = year, y = owners)) +
+  geom_spike() +
+  coord_polar()
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/spikeplots.png}
+\end{center}
+
+![`geom_spike`](assets/dubois/spike.png){height=45% margin=0}
 
 This geom was inspired by plate 22 of _Data Portraits_, shown alongside
 the rendered output of [@lst:spike] below. Here, spikes take on a
@@ -473,7 +516,7 @@ slightly more violent shape, with serrated marks stabbing into circles
 at the center. This graphic argues that one years' data stems from
 previous years' data, as opposed to being completely separated measures.
 In the context of my graphic, Georgia in 2000 is very much tied to
-Georgia in 1990.
+Georgia in 1970.
 
 A quirk about this geom and the `geom_spiral` function that follows is
 that in order to be understood within the `ggplot2` framework, the
@@ -503,13 +546,20 @@ the modular nature of `ggplot2`. The caveat to this modular nature is
 that to achieve the same spiral nature as Du Bois' drawings, the
 `coord_polar()` coordinate system must be applied. Without
 `coord_polar()`, a completely different (and in this case mostly
-nonsensical and undesired) graphic results).
+nonsensical and undesired) graphic is produced.
 
 ```{#lst:spiral .R caption="geom_spiral()"}
-ggplot(georgia, aes(x = year, y = high_school_grads)) +
+ggplot(georgia, aes(x = year, y = median_income)) +
   geom_spiral() +
   coord_polar()
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/spiral.png} \end{center}
+
+![`geom_spiral`](assets/dubois/spiral.png){height=45% margin=0}
 
 The spiral shape is one of Du Bois' many responses to the issue of
 scale. Demographic variables like income or raw population counts
@@ -542,10 +592,18 @@ segment following this are connected at alternating $+45^\circ$ and
 $-45^\circ$ angles.
 
 ```{#lst:pathspiral .R caption="geom_pathspiral()"}
-ggplot(georgia, aes(x = year, y = high_school_grads)) +
+ggplot(georgia, aes(x = year, y = total_population)) +
   geom_pathspiral() +
   coord_polar()
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/pathspiral.png}
+\end{center}
+
+![`geom_pathspiral`](assets/dubois/pathspiral.png){height=45% margin=0}
 
 The result of this path-spiral pattern is that while the category
 associated with the largest value is made more compact by being wrapped
@@ -591,25 +649,41 @@ the bar, and users can supply alternative values through the optional
 "width" parameter.
 
 ```{#lst:wrappedbar .R caption="geom_wrappedbar()"}
-ggplot(georgia, aes(x = year, y = high_school_grads)) +
+ggplot(georgia, aes(x = year, y = median_income)) +
   geom_wrappedbar()
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/wrappedbar.png}
+\end{center}
+
+![`geom_wrappedbar`](assets/dubois/wrappedbar.png){height=45% margin=0}
 
 ### `geom_wovenbar`
 
 `geom_wovenbar` is inspired by Plate 23 of Du Bois's exhibition. It
-receives four variables: one continuous variable, two discrete variables
-with any number of levels, and one binary variable. Du Bois then
-interweaves two plots, one for each value of the binary variable. Each
-plot uses the two discrete variables as independent variables and uses
-the continuous variable as a response variable, drawing a bar for each
-possible level of the discrete variables. For a clearer explanation, see
-the graphic below.
+receives up to four variables: one continuous variable, up to two
+discrete variables with any number of levels, and one binary variable.
+Du Bois then interweaves two plots, one for each value of the binary
+variable. Each plot uses the two discrete variables as independent
+variables to order the x-axis, and uses the continuous variable as a
+response variable, drawing a bar for each possible level of the discrete
+variables. For a clearer explanation, see the graphic below.
 
 ```{#lst:wovenbar .R caption="geom_wovenbar()"}
-ggplot(georgia, aes(x = year, y = value, group = relationship_type, fill = location )) +
+ggplot(georgia, aes(x = income, y = occupation, group = year)) +
   geom_wrappedbar()
 ```
+
+\newpage
+
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/wovenbar.png}
+\end{center}
+
+![`geom_wovenbar`](assets/dubois/wovenbar.png){height=45% margin=0}
 
 Here, the continuous variable is mapped to `y`, the binary variable is
 mapped to `group`, and the two discrete variables are mapped to `x` and
@@ -617,14 +691,14 @@ mapped to `group`, and the two discrete variables are mapped to `x` and
 
 Du Bois provides two insights in this shape. The first lies in
 incorporating four variables into a single graphic, a feat that is
-usually fairly difficult but is important for seeing interactions of
-several variables at once.
-
-The second insight Du Bois provides is the woven nature of these bars,
-that suggest an almost physical connection between the categories
-pictured. Du Bois recognized that the number of property owners and the
-amount of property owned were not two separate concepts, but
-manifestations of a single concept of property ownership.
+usually fairly difficult but is useful for seeing interactions of
+several variables at once. He does so by reusing directions; in my
+example, the x-axis is used both to represent year for the income
+variable and as the value of the occupation variable. The second insight
+Du Bois provides is the interwoven nature of these bars, that suggest an
+almost physical connection between the categories pictured. Like the
+spike plot above, Du Bois recognizes that much of the data available to
+him are not separate concepts but interconnected.
 
 In return for the above two strategies, the `geom_wovenbar` graphic is
 possibly Du Bois' most complex shape. Especially compared to shapes
@@ -650,18 +724,24 @@ variables order the _x_ and _y_ axes, and the categorical variable
 determines the colors and heights of different sections of the square.
 
 An example is shown in the code snippet and graphic below. Here, the
-categorical variable is occupation, and the continuous variables are
-time and the percent of the total population that each occupation is
-associated with.
+categorical variable is race, and the continuous variables are time and
+the percent of the total population that each race is associated with.
 
 ```{#lst:square .R caption="geom_square()"}
-ggplot(georgia, aes(x = year, y = percent_population, fill = occupation)) +
+ggplot(georgia, aes(x = year, y = percent_population, fill = race)) +
   geom_wrappedbar()
 ```
 
+<!--prettier-ignore -->
+\begin{center}
+\includegraphics[height=0.45\textheight]{assets/square.png}
+\end{center}
+
+![`geom_square`](assets/dubois/square.png){height=50% margin=0}
+
 This graphic makes a visual argument for the tight connections between
-groups. Different occupations, for example, are not entirely different
-groups but sections of one whole.
+groups. For Du Bois, the population of free Black people was not
+separable from the population who were slaves, but tightly connected.
 
 ### `theme_dubois`
 
@@ -669,11 +749,12 @@ Besides geometries, `ggdubois` also provides utilities for creating
 graphics in the style of W.E.B. Du Bois. The first is a theme, which can
 be appended to a `ggplot2` object to apply styling related to spacing
 between plot elements, the grid lines of the plot, the plot typography,
-and certain baseline colors. Themes are overridable, meaning that users
-can use `theme_dubois` as a baseline theme and then tweak aesthetics as
-the user best sees fit.
+and certain baseline colors.^[All of the figures in this presentation
+have used `theme_dubois`, so I will forgo a dedicated figure.] Themes
+are overridable, meaning that users can use `theme_dubois` as a baseline
+theme and then tweak aesthetics as the user best sees fit.
 
-```{#lst:theme .R caption="theme_dubois()"}
+```{#lst:theme .R caption="Syntax demonstration for theme_dubois()"}
 ggplot(georgia, aes(x = year, y = percent_population, fill = occupation)) +
   geom_wrappedbar() +
   theme_dubois()
@@ -682,15 +763,16 @@ ggplot(georgia, aes(x = year, y = percent_population, fill = occupation)) +
 ### `dubois_pal`
 
 The other non-geometric utility that `ggdubois` provides is a set of
-color palettes: one divergent palette and one sequential palette, as
-well as convenience functions for creating continuous color scales that
-interpolate colors between the ones provided.
+color palettes: one divergent palette and one sequential palette,
+convenience functions for creating continuous color scales that
+interpolate colors between the ones provided, and two functions that
+allow this color palette to easily be "plugged into" a `ggplot2` object.
 
-The divergent palette is taken without modification from Anthony Sparks'
+The divergent palette is taken without modification from Anthony Starks'
 Data Portraits project that reproduces many of Du Bois' works.^[This is
 permissible under the Creative Commons Attribution-NonCommercial License
 4.0, see
-https://github.com/ajstarks/dubois-data-portraits/blob/master/LICENSE.md.]
+<https://github.com/ajstarks/dubois-data-portraits/blob/master/LICENSE.md>.]
 Of particular note are the red, green, and black colors that are often
 paired together in Du Bois' plates, which represent the colors of the
 Pan-African flag. Du Bois was a prominent advocate of movements like the
@@ -722,9 +804,54 @@ ggplot(georgia, aes(x = median_income, y = high_school_graduates)) +
   scale_color_dubois()
 ```
 
-# Analysis
+![The `dubois_divergent` color palette](assets/pal_view.png)
 
 # Conclusion
+
+This package still has some work required before it is ready for public
+use. Documentation, unit testing, additional options for each geom, and
+additional color palettes and styling tools are all areas for further
+work. Besides improving the existing components of the package, the
+package also has room to add more geoms by looking into Du Bois' other
+work like his seminal _The Philadelphia Negro_, as well as graphics
+created during his time as the editor of _The Crisis_ magazine.
+
+I also hope Du Bois' perspective can be communicated in other mediums
+besides this package. This package is useful for creating static
+graphics, but just as exciting would be to see Du Bois-inspired graphics
+in interactive and animation-enabled mediums. The plotly library in
+Python and R and the Shiny framework in R are two popular examples of
+this, and are closely related to ggplot2 development.^[The plotly
+library in R can turn most graphics created with `ggplot2` into an
+interactive graphic with a single line change, a testament to ggplot2's
+popularity and plotly's recognition of this. The Shiny framework for
+interactive data presentations is developed by RStudio, from which the
+ggplot2 library and many other popular systems in R also emerged] The
+best candidate in my mind for this project is the aforementioned d3
+ecosystem in JavaScript, being built to create a wildly diverse array of
+graphics for the web.
+
+These additional steps can cement what this project has tried to show.
+As important as a grammar of graphics and a defined system of data
+visualization is, just as important are the creativity and tools to
+reach beyond this grammar. Du Bois has broken ground in the creative
+aspects of this endeavor; I hope through `ggdubois` to provide the
+tooling to complement this and to allow others to recognize his work.
+
+\newpage
+
+| Variable                                | Source                                                                            |
+| --------------------------------------- | --------------------------------------------------------------------------------- |
+| Population counts by race and ethnicity | The IPUMS project at the University of Minnesota; the United States Census Bureau |
+| Geographic features and shapes          | IPUMS; the TIGER/LINE shapefiles program                                          |
+| Median household income                 | U.S. Census Bureau                                                                |
+| Population of color                     | U.S. Census Bureau                                                                |
+| Unemployment rate                       | Bureau of Labor Statistics                                                        |
+| Child poverty rate                      | The County Health Rankings Project at the University of Wisconsin                 |
+| Particulate matter less than 2.5 μm     | The Environmental Protection Agency                                               |
+| Rent burden                             | The Eviction Lab at Princeton University                                          |
+
+Table: Variables and data sources provided with the `ggdubois` package.
 
 \newpage
 
