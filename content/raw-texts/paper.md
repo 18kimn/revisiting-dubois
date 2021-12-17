@@ -12,16 +12,18 @@ header-includes:
 
 # Introduction
 
-Prolific and prominent Black writer, historian, professor, political
-activist, W.E.B. Du Bois has left a legend in many ways. In addition to
-being a sociologist who meticulously drew and recorded social statistics
-for over fifty years, Du Bois was also a Black theorist of knowledge, an
-educator, a novel writer, and a historian. Some of these perspectives
-are visible in his approach to data visualization. While other data
-visualization pioneers like Edward Tufte try to objectively gauge the
-value of a dataset as the proportion to which it represents "truth," Du
-Bois recognizes visualization as a creative endeavor alongside
-photography and historical analysis.
+Prolific and prominent Black historian W.E.B. Du Bois has left a legend
+in many ways. In addition to being a sociologist who meticulously drew
+and recorded social statistics for over fifty years, Du Bois was also a
+Black theorist of knowledge, an educator, a novel writer, and a
+historian. His groundbreaking contributions to the humanities as a
+pioneer and radical theorist is undisputed. Less acknowledged are his
+perspectives on quantitative information and data visualization that
+were built on the same critical and creative ground as his perspectives
+in the humanities. While other data visualization pioneers like Edward
+Tufte try to objectively gauge the value of a dataset as the proportion
+to which it represents "truth," Du Bois recognizes visualization as a
+creative endeavor alongside photography and historical analysis.
 
 My project seeks to explore his work with a critical and quantitative
 lens. I hope to bring to Du Bois' portraits the worlds of modern
@@ -38,8 +40,8 @@ to also convey his artistic perspective on data visualization.
 
 Modern data visualization began with modernity itself. The map as a
 medium was developed first, alongside modern notions of states and
-borders throughout the fifteenth and sixteenth centuries.^[] States had
-new reasons to formally define borders through a codified text and
+borders throughout the fifteenth and sixteenth centuries. States had new
+reasons to formally define borders through a codified text and
 recognizable medium -- the map. Other forms of data visualization, like
 bar and line charts, were developed over time to similarly convey
 graphically what language had to stretch to express. The earliest known
@@ -74,9 +76,7 @@ some scholars call the "dark ages" of modern data visualization,
 discoveries like these progressed steadily from 1600 onward.
 
 Today, the accepted canon of data visualization pioneers has coalesced
-around Edward Tufte, Jacques Bertin, and John W. Tukey.^[There are of
-course many, many scholars that laid the foundation for modern data
-visualization besides these. Some examples are.... ] Bertin, in his
+around Edward Tufte, Jacques Bertin, and John W. Tukey. Bertin, in his
 _Semiology of Graphics_, established a conceptual backbone that related
 visual elements directly to trends within data through graphical
 components, an idea from which other graphical "grammars" (including
